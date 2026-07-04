@@ -1,0 +1,72 @@
+* {
+    /* Определяем переменные цветов */
+    black:      #000000;
+    pink: #48FF00;
+    white:      #FFFFFF;
+    
+    background-color: @black;
+    border-color:     @pink;
+    text-color:       @white;
+}
+
+window {
+    background-color: @black;
+    border:           3px;          /* Толщина рамки */
+    border-color:     @pink;        /* Цвет рамки */
+    padding:          10px 10px 0px 10px;         /* Отступ внутри окна */
+    width:            30%;          /* Ширина окна */
+    height:           55%;
+}
+
+mainbox {
+    background-color: @black;
+    border:  0;
+    padding: 0;
+    spacing: 0px;
+}
+
+listview {
+    background-color: @black;
+    fixed-height: 0;
+    border:       0;
+    spacing:      8px;
+    scrollbar:    false;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+}
+
+element {
+    background-color: @black;
+    padding: 3px;
+}
+
+element selected {
+    background-color: @pink;        /* Цвет выделенного пункта */
+    text-color:       @black;       /* Цвет текста при выделении */
+}
+
+inputbar {
+    children: [prompt, entry];
+    border: 0 0 3px 0;
+    border-color: @pink;
+    padding: 0px 10px;
+    margin: 0 0 10px 0;
+}
+/* Настройка иконки */
+element-icon {
+    size: 24px;
+    margin: 0 10px 0 5; /* Увеличиваем расстояние до текста */
+    background-color: transparent;
+}
+
+element-text {
+    vertical-align: 1;
+    padding: 0 0 0 8px;
+}
+
+entry {
+    /* Цвет текста остается белым/розовым, 
+       а курсор становится прозрачным или черным под фон */
+    cursor-color:       transparent; 
+    cursor-width:       0px; /* Убираем ширину курсора */
+}

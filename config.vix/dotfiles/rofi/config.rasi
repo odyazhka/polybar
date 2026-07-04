@@ -1,0 +1,10 @@
+configuration {
+    modi: "window,run,drun";
+    show-icons: false;
+    font: "Terminus Bold 18";
+    display-drun: "Поиск: ";
+    display-window: "Открытые окна: ";
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
+}
+@theme "~/.config/rofi/my_theme.rasi"

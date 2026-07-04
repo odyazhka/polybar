@@ -1,0 +1,34 @@
+#! /bin/sh
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+xrandr --output HDMI-1 --mode 1920x1080 --rate 120 --pos 1280x0 --primary
+xrandr --newmode  "1280x720_60.00"   74.50  1280 1344 1472 1664  720 723 728 748 -hsync +vsync
+xrandr --addmode eDP-1 "1280x720_60.00"
+xrandr --output eDP-1 --mode 1280x720_60.00 --pos 0x200
+sudo /usr/local/bin/v2raya --log-disable-timestamp > /dev/null &
+xrdb -merge $HOME/.Xresources &
+xmodmap ~/.Xmodmap &
+~/.config/polybar/scripts/launch.sh &
+tee /sys/class/backlight/intel_backlight/brightness < ~/.local/bg > /dev/null &
+numlockx on &
+feh --bg-scale ~/oboi.png &
+
+#bspc monitor -d I II III IV V VI VII VIII IX X
+bspc monitor HDMI-1 -d 6 7 8 9 10
+bspc monitor eDP-1 -d 1 2 3 4 5
+
+bspc config border_width        3 
+bspc config window_gap          0
+bspc config focused_border_color "#48FF00"
+bspc config normal_border_color "#595959"
+bspc config single_monocle false
+
+
+
+bspc config split_ratio          0.5
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+bspc config focus_follows_pointer true
+bspc config focus_by_distance true

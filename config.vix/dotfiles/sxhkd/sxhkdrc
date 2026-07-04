@@ -1,0 +1,124 @@
+# СПИСОК ОТКРЫТЫХ ОКОН
+super + Tab
+	rofi -show window -show-icons -window-format "\{w\}  \{t\}"
+	
+# РАСПОЛОВИНИТЬ ОКНО
+alt + button1
+    ~/.config/sxhkd/scripts/alt.sh
+
+# ВСТАВКА ДЛЯ ТЕРМИНАЛА
+ctrl + shift + v
+    xdotool keyup ctrl shift v; xdotool click 2
+
+# СКРИНШОТЫ
+F1
+	maim -s -u -q | xclip -selection clipboard -t image/png
+
+super + F1
+    maim -s -u -q -d 5 | xclip -selection clipboard -t image/png
+
+F1 + shift
+	maim -u -q -g $(bspc query -T -m | jq -r '.rectangle | "\(.width)x\(.height)+\(.x)+\(.y)"') | xclip -selection clipboard -t image/png
+
+# ИЗМЕНЕНИЕ ОРИЕНТАЦИИ
+super + r
+	bspc node @parent -R 90
+	
+# terminal emulator
+super + Return
+	xterm
+
+# program launcher
+super + space
+	rofi -show drun -show-icons
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+#
+# bspwm hotkeys
+#
+
+# РАЗВЕРНУТЬ (С РАМКАМИ)
+super + x
+	~/.config/sxhkd/scripts/x.sh
+	
+# СВЕРНУТЬ/РАЗВЕРНУТЬ ВСЕ ОКНА
+super + d
+	~/.config/sxhkd/scripts/d.sh
+	
+# quit/restart bspwm
+super + alt + {q,r}
+	bspc {quit,wm -r}
+
+# close
+super + c
+	bspc node -{c}
+	
+alt + F4
+	bspc node -{k}
+
+# close and kill
+super + k
+	bspc node -{k}
+
+
+#РАЗВЕРНУТЬ БЕЗ РАМОК
+# alternate between the tiled and monocle layout
+super + z
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest window
+super + g
+	bspc node -s biggest.window
+	
+#БЛОКИРОВКА
+super + l
+	~/.config/polybar/scripts/xlock.sh
+
+#контральтделит
+ctrl + alt + Delete
+    ~/.config/rofi/rofi-power.sh
+    
+# МЕНЕДЖЕР СЕРВИСОВ
+super + v
+    odjk-sv
+    
+# МЕНЕДЖЕР СЕТЕЙ
+super + n
+    odjk-ip
+
+#
+# state/flags
+#
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# ОТПРАВИТЬ НА ДРУГОЙ РАБОЧИЙ СТОЛ	
+alt + {1-9,0}
+	bspc {node -d} '^{1-9,10}'
+
+# ОТКРЫТЬ ДРУГОЙ РАБОЧИЙ СТОЛ
+super + {1-9,0}
+    bspc desktop -f '^{1-9,10}'
