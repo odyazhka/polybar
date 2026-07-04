@@ -1,2 +1,0 @@
-(gtk_window_set_accel_path "<Actions>/GeanyMenuBarActions/MenuClose" "<Primary>x")
-(gtk_window_set_accel_path "<Actions>/GeanyMenuBarActions/MenuClose" "<Primary>Cyrillic_che")
